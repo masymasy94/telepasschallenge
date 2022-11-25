@@ -3,11 +3,16 @@ package com.masy.telepasschallenge;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @SpringBootTest
-class TelepassChallengeApplicationTests {
+class ApplicationContextTest {
 
     @Test
     void contextLoads() {
+        // if the application context has some errors then this test fails
+        assertTrue(true);
     }
+
 
 }
