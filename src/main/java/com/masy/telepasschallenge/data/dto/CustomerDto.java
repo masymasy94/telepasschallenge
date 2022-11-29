@@ -1,4 +1,4 @@
-package com.masy.telepasschallenge.data.model;
+package com.masy.telepasschallenge.data.dto;
 
 import lombok.Data;
 

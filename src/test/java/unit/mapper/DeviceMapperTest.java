@@ -1,16 +1,14 @@
 package unit.mapper;
 
+import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.model.Customer;
 import com.masy.telepasschallenge.data.model.Device;
-import com.masy.telepasschallenge.data.model.DeviceDto;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.mapper.DeviceMapperImpl;
 import com.masy.telepasschallenge.repository.CustomerRepository;
-import org.assertj.core.api.BDDAssertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -18,7 +16,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)

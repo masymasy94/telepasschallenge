@@ -1,8 +1,8 @@
 package com.masy.telepasschallenge.mapper;
 
+import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.model.Customer;
 import com.masy.telepasschallenge.data.model.Device;
-import com.masy.telepasschallenge.data.model.DeviceDto;
 import com.masy.telepasschallenge.exception.NotFoundException;
 import com.masy.telepasschallenge.repository.CustomerRepository;
 import lombok.Setter;
