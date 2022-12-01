@@ -6,6 +6,7 @@ import com.masy.telepasschallenge.data.model.Device;
 import com.masy.telepasschallenge.exception.MaxDevicesToCustomerException;
 import com.masy.telepasschallenge.exception.NotDeletedException;
 import com.masy.telepasschallenge.exception.NotFoundException;
+import com.masy.telepasschallenge.exception.NotUpdatedException;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.repository.DeviceRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,7 +41,7 @@ class DeviceServiceImplTest {
     }
 
     @Test
-    void findDevice_ThrowsNotFound() {
+    void findDevice_NotFound() {
         // given
         UUID id = UUID.randomUUID();
         given(deviceRepository.findById(id))
@@ -72,7 +73,7 @@ class DeviceServiceImplTest {
     }
 
     @Test
-    void saveDevice_ThrowsMaxDevices() {
+    void saveDevice_MaxDevices() {
 
         // given
         DeviceDto dto = new DeviceDto().setCustomer(1L);
@@ -108,7 +109,7 @@ class DeviceServiceImplTest {
     }
 
     @Test
-    void deleteDevice_NotFound() {
+    void deleteDevice_NotDeleted() {
         //given
         UUID id = UUID.randomUUID();
         given(deviceRepository.findById(id)).willReturn(Optional.empty());
@@ -146,7 +147,7 @@ class DeviceServiceImplTest {
         Throwable actual = catchThrowable(() -> underTest.updateStatus(id, new DeviceStatusDto()));
 
         // then
-        then(actual).isInstanceOf(NotFoundException.class);
+        then(actual).isInstanceOf(NotUpdatedException.class);
 
     }
 
