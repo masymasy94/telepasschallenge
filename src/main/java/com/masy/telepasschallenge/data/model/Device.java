@@ -14,6 +14,7 @@ public class Device {
 
     @Id
     @GeneratedValue
+    @Column(length = 16)
     UUID id;
 
     @Enumerated(EnumType.STRING)
