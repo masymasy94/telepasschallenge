@@ -2,11 +2,9 @@ package com.masy.telepasschallenge.service;
 
 import com.masy.telepasschallenge.data.dto.CustomerAddressDto;
 import com.masy.telepasschallenge.data.dto.CustomerDto;
-import com.masy.telepasschallenge.data.dto.CustomerWithDvicesDto;
+import com.masy.telepasschallenge.data.dto.CustomerWithDevicesDto;
 import com.masy.telepasschallenge.data.dto.DeviceDto;
-import com.masy.telepasschallenge.exception.NotDeletedException;
 import com.masy.telepasschallenge.exception.NotFoundException;
-import com.masy.telepasschallenge.exception.NotUpdatedException;
 import com.masy.telepasschallenge.mapper.CustomerMapper;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.repository.CustomerRepository;
@@ -29,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     @Transactional(readOnly = true)
-    public CustomerWithDvicesDto findCustomer(Long id) {
+    public CustomerWithDevicesDto findCustomer(Long id) {
 
         CustomerDto customer = customerRepository.findById(id)
                 .map(customerMapper::mapToDto)
@@ -40,8 +38,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(deviceMapper::mapToDto)
                 .toList();
 
-
-        return new CustomerWithDvicesDto()
+        return new CustomerWithDevicesDto()
                 .setCustomer(customer)
                 .setDevices(customerDevices);
     }
@@ -50,7 +47,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void updateAddress(Long id, CustomerAddressDto dto) {
         customerRepository.findById(id).ifPresentOrElse(
                 customer -> customer.setAddress(dto.getNewAddress()),
-                () ->  {throw new NotUpdatedException();}
+                () ->  {throw new NotFoundException();}
         );
     }
 
@@ -65,7 +62,7 @@ public class CustomerServiceImpl implements CustomerService {
     public void deleteCustomer(Long id) {
         customerRepository.findById(id).ifPresentOrElse(
                 customerRepository::delete,
-                () -> {throw new NotDeletedException();}
+                () -> {throw new NotFoundException();}
         );
     }
 }

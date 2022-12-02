@@ -2,7 +2,7 @@ package com.masy.telepasschallenge.controller;
 
 import com.masy.telepasschallenge.data.dto.CustomerAddressDto;
 import com.masy.telepasschallenge.data.dto.CustomerDto;
-import com.masy.telepasschallenge.data.dto.CustomerWithDvicesDto;
+import com.masy.telepasschallenge.data.dto.CustomerWithDevicesDto;
 import com.masy.telepasschallenge.service.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,18 +21,13 @@ public class CustomerController {
 
     private final CustomerService customerService;
 
-//    Dovrà essere possibile recuperare i dati aggregati di utente e device
-    //GET customer/{id}
-    //GET customer/{id}/devices ? non so se rischiesta l'esposizione
     @GetMapping("{id}")
-    public CustomerWithDvicesDto getCustomer(@PathVariable Long id) {
+    public CustomerWithDevicesDto getCustomer(@PathVariable Long id) {
         return customerService.findCustomer(id);
 
     }
 
 
-//    Di un utente è possibile modificare solo l'indirizzo
-    //PATCH address
     @PatchMapping(value = "{id}", consumes = MediaType.APPLICATION_JSON_VALUE )
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateAddress(@PathVariable Long id, @RequestBody @Valid CustomerAddressDto dto){
@@ -41,9 +36,6 @@ public class CustomerController {
     }
 
 
-
-
-    //POST insert ?
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> insertCustomer(@RequestBody CustomerDto dto) {
 
@@ -54,7 +46,7 @@ public class CustomerController {
                 .build();
     }
 
-    //DELETE ?
+
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT) // or 404
     public void deleteCustomer(@PathVariable Long id) {

@@ -1,6 +1,7 @@
-package com.masy.telepasschallenge.controller;
+package unit.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.masy.telepasschallenge.controller.DeviceController;
 import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.dto.DeviceStatusDto;
 import com.masy.telepasschallenge.data.model.Device;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import util.TelepassSpringTest;
 
 import java.util.UUID;
 
@@ -21,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@WebMvcTest(DeviceController.class)
+@TelepassSpringTest
 class DeviceControllerTest {
 
     @MockBean

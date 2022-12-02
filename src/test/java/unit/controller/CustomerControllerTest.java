@@ -1,10 +1,10 @@
-package com.masy.telepasschallenge.controller;
+package unit.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.masy.telepasschallenge.data.dto.*;
-import com.masy.telepasschallenge.data.model.Customer;
-import com.masy.telepasschallenge.data.model.Device;
+import com.masy.telepasschallenge.controller.CustomerController;
+import com.masy.telepasschallenge.data.dto.CustomerAddressDto;
+import com.masy.telepasschallenge.data.dto.CustomerDto;
+import com.masy.telepasschallenge.data.dto.CustomerWithDevicesDto;
 import com.masy.telepasschallenge.service.CustomerService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
-
-import java.util.UUID;
+import util.TelepassSpringTest;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(CustomerController.class)
+@TelepassSpringTest
 class CustomerControllerTest {
     @MockBean
     private CustomerService customerService;
@@ -37,7 +36,7 @@ class CustomerControllerTest {
         // given
         Long id = 1L;
         CustomerDto customer = new CustomerDto().setId(id);
-        CustomerWithDvicesDto expected = new CustomerWithDvicesDto().setCustomer(customer);
+        CustomerWithDevicesDto expected = new CustomerWithDevicesDto().setCustomer(customer);
         given(customerService.findCustomer(id))
                 .willReturn(expected);
 

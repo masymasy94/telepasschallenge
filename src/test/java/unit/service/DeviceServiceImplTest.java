@@ -1,14 +1,13 @@
-package com.masy.telepasschallenge.service;
+package unit.service;
 
 import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.dto.DeviceStatusDto;
 import com.masy.telepasschallenge.data.model.Device;
 import com.masy.telepasschallenge.exception.MaxDevicesToCustomerException;
-import com.masy.telepasschallenge.exception.NotDeletedException;
 import com.masy.telepasschallenge.exception.NotFoundException;
-import com.masy.telepasschallenge.exception.NotUpdatedException;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.repository.DeviceRepository;
+import com.masy.telepasschallenge.service.DeviceServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -118,7 +117,7 @@ class DeviceServiceImplTest {
         Throwable actual = catchThrowable(() -> underTest.deleteDevice(id));
 
         // then
-        then(actual).isInstanceOf(NotDeletedException.class);
+        then(actual).isInstanceOf(NotFoundException.class);
 
     }
 
@@ -147,7 +146,7 @@ class DeviceServiceImplTest {
         Throwable actual = catchThrowable(() -> underTest.updateStatus(id, new DeviceStatusDto()));
 
         // then
-        then(actual).isInstanceOf(NotUpdatedException.class);
+        then(actual).isInstanceOf(NotFoundException.class);
 
     }
 

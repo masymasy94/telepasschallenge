@@ -1,19 +1,17 @@
-package com.masy.telepasschallenge.service;
+package unit.service;
 
 import com.masy.telepasschallenge.data.dto.CustomerAddressDto;
 import com.masy.telepasschallenge.data.dto.CustomerDto;
-import com.masy.telepasschallenge.data.dto.CustomerWithDvicesDto;
+import com.masy.telepasschallenge.data.dto.CustomerWithDevicesDto;
 import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.model.Customer;
 import com.masy.telepasschallenge.data.model.Device;
-import com.masy.telepasschallenge.exception.NotDeletedException;
 import com.masy.telepasschallenge.exception.NotFoundException;
-import com.masy.telepasschallenge.exception.NotUpdatedException;
 import com.masy.telepasschallenge.mapper.CustomerMapper;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.repository.CustomerRepository;
 import com.masy.telepasschallenge.repository.DeviceRepository;
-import org.assertj.core.api.BDDAssertions;
+import com.masy.telepasschallenge.service.CustomerServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,7 +25,6 @@ import java.util.Optional;
 
 import static org.assertj.core.api.BDDAssertions.catchThrowable;
 import static org.assertj.core.api.BDDAssertions.then;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 
 @ExtendWith(MockitoExtension.class)
@@ -87,12 +84,12 @@ class CustomerServiceImplTest {
                 .willReturn(devices);
         given(deviceMapper.mapToDto(device))
                 .willReturn(deviceDto);
-        CustomerWithDvicesDto expected = new CustomerWithDvicesDto()
+        CustomerWithDevicesDto expected = new CustomerWithDevicesDto()
                 .setCustomer(customerDto)
                 .setDevices(Collections.singletonList(deviceDto));
 
         // when
-        CustomerWithDvicesDto actual = underTest.findCustomer(customerId);
+        CustomerWithDevicesDto actual = underTest.findCustomer(customerId);
 
         // then
         then(actual).isEqualTo(expected);
@@ -112,7 +109,7 @@ class CustomerServiceImplTest {
         Throwable actual = catchThrowable(() -> underTest.updateAddress(id, dto));
 
         // then
-        then(actual).isInstanceOf(NotUpdatedException.class);
+        then(actual).isInstanceOf(NotFoundException.class);
 
     }
 
@@ -163,7 +160,7 @@ class CustomerServiceImplTest {
         Throwable actual = catchThrowable(() -> underTest.deleteCustomer(id));
 
         // then
-        then(actual).isInstanceOf(NotDeletedException.class);
+        then(actual).isInstanceOf(NotFoundException.class);
 
     }
 

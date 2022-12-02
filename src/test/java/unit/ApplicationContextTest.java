@@ -1,13 +1,13 @@
-package com.masy.telepasschallenge;
+package unit;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import util.TelepassSpringTest;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@SpringBootTest
-@ActiveProfiles("test")
+@TelepassSpringTest
 class ApplicationContextTest {
 
     @Test

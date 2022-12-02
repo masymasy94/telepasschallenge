@@ -4,9 +4,7 @@ import com.masy.telepasschallenge.data.dto.DeviceDto;
 import com.masy.telepasschallenge.data.dto.DeviceStatusDto;
 import com.masy.telepasschallenge.data.model.Device;
 import com.masy.telepasschallenge.exception.MaxDevicesToCustomerException;
-import com.masy.telepasschallenge.exception.NotDeletedException;
 import com.masy.telepasschallenge.exception.NotFoundException;
-import com.masy.telepasschallenge.exception.NotUpdatedException;
 import com.masy.telepasschallenge.mapper.DeviceMapper;
 import com.masy.telepasschallenge.repository.DeviceRepository;
 import lombok.RequiredArgsConstructor;
@@ -57,7 +55,7 @@ public class DeviceServiceImpl implements DeviceService {
 
         deviceRepository.findById(id).ifPresentOrElse(
                 deviceRepository::delete,
-                () -> {throw new NotDeletedException();}
+                () -> {throw new NotFoundException();}
         );
     }
 
@@ -67,7 +65,7 @@ public class DeviceServiceImpl implements DeviceService {
 
         deviceRepository.findById(id).ifPresentOrElse(
                 device -> device.setStatus(dto.getNewStatus()),
-                () -> {throw new NotUpdatedException();}
+                () -> {throw new NotFoundException();}
         );
     }
 }
