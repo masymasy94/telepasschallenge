@@ -1,4 +1,4 @@
-# telepass-challange
+# telepass-challenge
 An example of a RESTful WebServer developed using SpringBoot.
 
 This simple server will store customers and devices, and will give the possibility to add/delete/update those entities.
